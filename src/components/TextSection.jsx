@@ -1,18 +1,31 @@
-import { Text } from "@react-three/drei";
+import { Text, Text3D, Image, useTexture } from "@react-three/drei";
 import { fadeOnBeforeCompileFlat } from "../utils/fadeMaterial";
 
-export const TextSection = ({ title, subtitle, ...props }) => {
+export const TextSection = ({
+  title,
+  subtitle,
+  direction,
+  image = null,
+  ...props
+}) => {
   return (
     <group {...props}>
+      <Image
+        width="400"
+        position-x={0.5}
+        position-y={1}
+        url={image ? image : "/duck.jpg"}
+      />
+
       {!!title && (
         <Text
-          color="white"
+          color="black"
           anchorX={"left"}
           anchorY="bottom"
           fontSize={0.52}
-          maxWidth={2.5}
+          maxWidth={5}
           lineHeight={1}
-          font={"./fonts/DMSerifDisplay-Regular.ttf"}
+          font={"./fonts/bangers-v20-latin-regular.woff"}
         >
           {title}
           <meshStandardMaterial
@@ -23,7 +36,7 @@ export const TextSection = ({ title, subtitle, ...props }) => {
       )}
 
       <Text
-        color="white"
+        color="black"
         anchorX={"left"}
         anchorY="top"
         fontSize={0.2}

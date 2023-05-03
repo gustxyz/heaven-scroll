@@ -1,7 +1,15 @@
-import { Float, PerspectiveCamera, useScroll } from "@react-three/drei";
+import {
+  Float,
+  PerspectiveCamera,
+  useScroll,
+  Image,
+  Html,
+  Sparkles,
+  useTexture,
+} from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { gsap } from "gsap";
-import { useLayoutEffect, useMemo, useRef } from "react";
+import { useLayoutEffect, useMemo, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { Euler, Group, Vector3 } from "three";
 import { fadeOnBeforeCompile } from "../utils/fadeMaterial";
@@ -9,16 +17,75 @@ import { fadeOnBeforeCompile } from "../utils/fadeMaterial";
 import { Background } from "./Background";
 import { Cloud } from "./Cloud";
 import { TextSection } from "./TextSection";
-import { Butterfly } from "./Butterfly";
+// import { Butterfly } from "./Butterfly";
+import { Dog } from "./Dog";
+import { AtpAgent } from "@atproto/api";
 
-const LINE_NB_POINTS = 1000;
+const LINE_NB_POINTS = 5000;
 const CURVE_DISTANCE = 250;
 const CURVE_AHEAD_CAMERA = 0.008;
 const CURVE_AHEAD_AIRPLANE = 0.02;
 const AIRPLANE_MAX_ANGLE = 35;
 const FRICTION_DISTANCE = 42;
 
+function isEven(n) {
+  return n % 2 == 0;
+}
+
+function isOdd(n) {
+  return Math.abs(n % 2) == 1;
+}
+
 export const Experience = () => {
+  const agent = new AtpAgent({
+    service: "https://bsky.social",
+  });
+
+  const [timeline, setTimeline] = useState(null);
+  const [curvePointArray, setCurvepointArray] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const { successTL, dataTL } = await agent.login({
+        identifier: "alexdaleciolong.bsky.social",
+        password: "7pzh-2t35-4lva-24ic",
+      });
+      // console.log(success, data);
+
+      // console.log(agent.api.app.bsky.feed.getTimeline());
+      const { success, data } = await agent.api.app.bsky.feed.getTimeline();
+      console.log("test");
+      console.log(success, data.feed);
+      console.log(data.feed[0].post.author.avatar);
+      setTimeline(data.feed);
+    })();
+  }, []);
+  useEffect(() => {
+    const points = 50;
+
+    const tempCurvePoints =
+      timeline &&
+      timeline.map((post, index) => {
+        console.log(index);
+        console.log(Math.floor(Math.random() * (3 - 1 + 1) + 1));
+        console.log("should 1, 2, or 3");
+
+        const randomNum3 = Math.floor(Math.random() * (3 - 1 + 1) + 1);
+        let curveVariant = 0;
+
+        if ((index = 0)) {
+          curveVariant = 0;
+        } else if (randomNum3 === 1) {
+          curveVariant = 100;
+        } else if (randomNum3 === 2) {
+          curveVariant = -100;
+        } else if (randomNum3 === 3) {
+          curveVariant = 0;
+        }
+
+        return new THREE.Vector3(curveVariant, 0, -index * CURVE_DISTANCE);
+      });
+  }, [timeline]);
   const curvePoints = useMemo(
     () => [
       new THREE.Vector3(0, 0, 0),
@@ -29,6 +96,23 @@ export const Experience = () => {
       new THREE.Vector3(0, 0, -5 * CURVE_DISTANCE),
       new THREE.Vector3(0, 0, -6 * CURVE_DISTANCE),
       new THREE.Vector3(0, 0, -7 * CURVE_DISTANCE),
+      new THREE.Vector3(100, 0, -8 * CURVE_DISTANCE),
+      new THREE.Vector3(0, 0, -9 * CURVE_DISTANCE),
+      new THREE.Vector3(0, 0, -10 * CURVE_DISTANCE),
+      new THREE.Vector3(0, 0, -11 * CURVE_DISTANCE),
+      new THREE.Vector3(100, 0, -12 * CURVE_DISTANCE),
+      new THREE.Vector3(100, 0, -13 * CURVE_DISTANCE),
+      new THREE.Vector3(-100, 0, -14 * CURVE_DISTANCE),
+      new THREE.Vector3(100, 0, -15 * CURVE_DISTANCE),
+      new THREE.Vector3(0, 0, -16 * CURVE_DISTANCE),
+      new THREE.Vector3(0, 0, -17 * CURVE_DISTANCE),
+      new THREE.Vector3(0, 0, -18 * CURVE_DISTANCE),
+      new THREE.Vector3(100, 0, -19 * CURVE_DISTANCE),
+      new THREE.Vector3(-100, 0, -20 * CURVE_DISTANCE),
+      new THREE.Vector3(100, 0, -21 * CURVE_DISTANCE),
+      new THREE.Vector3(0, 0, -22 * CURVE_DISTANCE),
+      new THREE.Vector3(0, 0, -23 * CURVE_DISTANCE),
+      new THREE.Vector3(0, 0, -24 * CURVE_DISTANCE),
     ],
     []
   );
@@ -38,6 +122,36 @@ export const Experience = () => {
   }, []);
 
   const textSections = useMemo(() => {
+    if (timeline) {
+      const textSections = curvePoints.map((curvePoint, index) => {
+        if (curvePoints.length === index + 1) {
+          return {
+            cameraRailDist: -1,
+            position: new Vector3(
+              curvePoints[index].x - 3,
+              curvePoints[index].y - 5,
+              curvePoints[index].z - 9
+            ),
+            title: "Final Skeet, please refresh my g.",
+            subtitle: ":)",
+          };
+        }
+        return {
+          cameraRailDist: -1,
+          position: new Vector3(
+            curvePoints[index + 1].x - 2,
+            curvePoints[index + 1].y,
+            curvePoints[index + 1].z - 9
+          ),
+          title: timeline && timeline[index].post.author.displayName,
+          subtitle: timeline && timeline[index].post.record.text,
+          image: timeline && timeline[index].post.author.image,
+        };
+      });
+
+      return textSections;
+    }
+
     return [
       {
         cameraRailDist: -1,
@@ -46,8 +160,9 @@ export const Experience = () => {
           curvePoints[1].y,
           curvePoints[1].z
         ),
-        subtitle: `Welcome to Heaven Scroll,
-A minimalistic social media client for Bluesky.`,
+        title: timeline && timeline[0].post.author.displayName,
+        subtitle: timeline && timeline[0].post.record.text,
+        // image: timeline && timeline[0].post.record.image,
       },
       {
         cameraRailDist: 1.5,
@@ -56,8 +171,8 @@ A minimalistic social media client for Bluesky.`,
           curvePoints[2].y,
           curvePoints[2].z
         ),
-        title: "What is it?",
-        subtitle: `Heaven scroll, is a zen social media client for Bluesky`,
+        title: timeline && timeline[1].post.author.displayName,
+        subtitle: timeline && timeline[1].post.record.text,
       },
       {
         cameraRailDist: -1,
@@ -66,8 +181,8 @@ A minimalistic social media client for Bluesky.`,
           curvePoints[3].y,
           curvePoints[3].z
         ),
-        title: "Interact with the skyline, on your own time",
-        subtitle: `See posts in a whole new way.`,
+        title: timeline && timeline[2].post.author.displayName,
+        subtitle: timeline && timeline[2].post.record.text,
       },
       {
         cameraRailDist: 1.5,
@@ -76,11 +191,11 @@ A minimalistic social media client for Bluesky.`,
           curvePoints[4].y,
           curvePoints[4].z - 12
         ),
-        title: "Thread and Images coming soon",
-        subtitle: `Thread are hard a shell to support, but we are working on it.`,
+        title: timeline && timeline[3].post.author.displayName,
+        subtitle: timeline && timeline[3].post.record.text,
       },
     ];
-  }, []);
+  }, [curvePoints, timeline]);
 
   const clouds = useMemo(
     () => [
@@ -264,6 +379,11 @@ A minimalistic social media client for Bluesky.`,
     ],
     []
   );
+  const particlerSizes = useMemo(() => {
+    return new Float32Array(
+      Array.from({ length: 50 }, () => Math.random() * 5)
+    );
+  }, []);
 
   const shape = useMemo(() => {
     const shape = new THREE.Shape();
@@ -386,7 +506,7 @@ A minimalistic social media client for Bluesky.`,
   const tl = useRef();
   const backgroundColors = useRef({
     colorA: "#0BA8E6",
-    colorB: "white",
+    colorB: "red",
   });
 
   useLayoutEffect(() => {
@@ -412,10 +532,20 @@ A minimalistic social media client for Bluesky.`,
         </group>
         <group ref={airplane}>
           <Float floatIntensity={1} speed={1.5} rotationIntensity={0.5}>
-            <Butterfly scale={[0.01, 0.01, 0.01]} position-y={-1} />
+            {/* <Butterfly scale={[0.01, 0.01, 0.01]} position-y={-1} /> */}
+            <Dog scale={[0.5, 0.5, 0.5]} position-y={-0.7} />
+            <Sparkles
+              position-y={-1}
+              size={particlerSizes}
+              color="yellow"
+              count={50}
+            />
           </Float>
         </group>
       </group>
+      {/* {timeline && (
+        <Image url={timeline[0].post.author.avatar} transparent opacity={0.5} />
+      )} */}
       {/* TEXT */}
       {textSections.map((textSection, index) => (
         <TextSection {...textSection} key={index} />
@@ -444,10 +574,14 @@ A minimalistic social media client for Bluesky.`,
         </mesh>
       </group>
 
+      {/* <Float floatIntensity={0.5} speed={0.3} rotationIntensity={0.5}> */}
       {/* CLOUDS */}
-      {clouds.map((cloud, index) => (
-        <Cloud {...cloud} key={index} />
-      ))}
+      <Float rotationIntensity={0.09}>
+        {clouds.map((cloud, index) => (
+          <Cloud {...cloud} opacity={0.5} key={index} />
+        ))}
+      </Float>
+      {/* </Float> */}
     </>
   );
 };

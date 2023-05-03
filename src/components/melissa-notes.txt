@@ -1,0 +1,17 @@
+OUTREACH
+
+*core values
+
+*problem
+-identify edge cases, solve battleship]
+-how to track time in state, rewind basic js
+
+-design 1hr
+-job exercise 1.5hr
+-data struct 1hr
+-hiring leadership 1hr
+
+As hungry craftspeople, we’re obsessed with continuous improvement. 
+Because we know that true champions have the will to break through walls, we have grit and perseverance. 
+We are one with our customers, treating their pain and success as our own. 
+We’re always honest with ourselves, our colleagues and our community.
