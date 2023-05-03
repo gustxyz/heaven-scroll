@@ -137,7 +137,7 @@ export const Experience = () => {
             subtitle: ":)",
           };
         }
-        console.log(timeline[index].post.author.image);
+        console.table(timeline[index].post.author.image);
         return {
           cameraRailDist: -1,
           position: new Vector3(
@@ -527,6 +527,7 @@ export const Experience = () => {
     <>
       <directionalLight position={[0, 3, 1]} intensity={0.1} />
       {/* <OrbitControls /> */}
+
       <group ref={cameraGroup}>
         <Background backgroundColors={backgroundColors} />
         <group ref={cameraRail}>
@@ -550,8 +551,11 @@ export const Experience = () => {
         <Image url={timeline[0].post.author.avatar} transparent opacity={0.5} />
       )} */}
       {/* TEXT */}
+
       {textSections.map((textSection, index) => (
-        <TextSection {...textSection} key={index} />
+        <>
+          <TextSection {...textSection} key={index} />
+        </>
       ))}
 
       {/* LINE */}

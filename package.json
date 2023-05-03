@@ -12,15 +12,15 @@
     "@atproto/api": "^0.2.7",
     "@atproto/lexicon": "^0.1.0",
     "@atproto/uri": "^0.0.1",
-    "@react-three/drei": "^9.56.28",
-    "@react-three/fiber": "^8.11.5",
+    "@react-three/drei": "^9.66.22",
+    "@react-three/fiber": "^8.13.0",
     "@react-three/postprocessing": "^2.7.1",
     "@vitejs/plugin-basic-ssl": "^1.0.1",
     "gsap": "^3.11.5",
     "lamina": "^1.1.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "three": "^0.150.1"
+    "three": "^0.152.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

@@ -803,10 +803,10 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.6.1.tgz#913d3a68c5cbc1124fdb18eff919432f7b6abdde"
   integrity sha512-POu8Mk0hIU3lRXB3bGIGe4VHIwwDsQyoD1F394OK7STTiX9w4dG3cTLljjYswkQN+hDSHRrj4O36kuVa7KPU8Q==
 
-"@react-three/drei@^9.56.28":
-  version "9.66.1"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.66.1.tgz#b5684d267949ea83ff84e9db01ea41b842d70f9b"
-  integrity sha512-nbSMsdoL52bLZtOZFMjkjjGzLLkx8hOuYEgvxX19TxR9+YpFnjbfzC3NtsjK719O4OJdNEHZOxmmxoANJJAXEA==
+"@react-three/drei@^9.66.22":
+  version "9.66.2"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.66.2.tgz#1bdb68917aca855eed55120c054f06d19860a105"
+  integrity sha512-CAxqP4YhtgDoTO/Y5Yl9PaV91x+CX/g/I4pXjlzr9HRCmYVnQHNQUKTR7L0LfTy0Nmv1Dys20zpa/x7XJ0z0Og==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "~9.6.1"
@@ -829,7 +829,7 @@
     utility-types "^3.10.0"
     zustand "^3.5.13"
 
-"@react-three/fiber@^8.11.5":
+"@react-three/fiber@^8.13.0":
   version "8.13.0"
   resolved "https://registry.yarnpkg.com/@react-three/fiber/-/fiber-8.13.0.tgz#c9eabe60f2276a66d7ce9a3b927083894f4202f9"
   integrity sha512-hPFzFNgikEMyEbL+NpSA7q+UWZxInrrkJldWaCR2w34Fwf20x9p68bsyN0/yn9oM2VlWoJcJjR8hw1tN9AxHuA==
@@ -1711,10 +1711,10 @@ three-stdlib@^2.21.10, three-stdlib@^2.21.8:
     potpack "^1.0.1"
     zstddec "^0.0.2"
 
-three@^0.150.1:
-  version "0.150.1"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.150.1.tgz#870d324a4d2daf1c7d55be97f3f73d83783e28be"
-  integrity sha512-5C1MqKUWaHYo13BX0Q64qcdwImgnnjSOFgBscOzAo8MYCzEtqfQqorEKMcajnA3FHy1yVlIe9AmaMQ0OQracNA==
+three@^0.152.2:
+  version "0.152.2"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.152.2.tgz#2ee0f2c504d31a4bc29b45495c12bded9fda7bfc"
+  integrity sha512-Ff9zIpSfkkqcBcpdiFo2f35vA9ZucO+N8TNacJOqaEE6DrB0eufItVMib8bK8Pcju/ZNT6a7blE1GhTpkdsILw==
 
 through2@^0.6.3:
   version "0.6.5"

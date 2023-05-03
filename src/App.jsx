@@ -11,6 +11,7 @@ function App() {
         <ScrollControls pages={20} damping={0.5}>
           <Experience />
         </ScrollControls>
+
         <EffectComposer>
           <Noise opacity={0.3} />
         </EffectComposer>
