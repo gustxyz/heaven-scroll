@@ -147,8 +147,7 @@ export const Experience = () => {
           ),
           title: timeline && timeline[index].post.author.displayName,
           subtitle: timeline && timeline[index].post.record.text,
-          image:
-            "https://cdn.bsky.social/imgproxy/mfhIFWl8FnNCp36MOEada6YqqecZe-J2iDQLH6FVWlU/rs:fill:1000:1000:1:0/plain/bafkreihxddlkbnblytjdbajg5qopawdfcabg5e7ppwja6zmm3lvnedzojm@jpeg",
+          image: timeline && timeline[index].post.author.avatar,
         };
       });
 
