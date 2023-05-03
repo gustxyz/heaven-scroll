@@ -5,7 +5,7 @@ export const TextSection = ({
   title,
   subtitle,
   direction,
-  image = null,
+  image,
   ...props
 }) => {
   return (

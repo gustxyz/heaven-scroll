@@ -6,6 +6,7 @@ import {
   Html,
   Sparkles,
   useTexture,
+  Trail,
 } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { gsap } from "gsap";
@@ -136,6 +137,7 @@ export const Experience = () => {
             subtitle: ":)",
           };
         }
+        console.log(timeline[index].post.author.image);
         return {
           cameraRailDist: -1,
           position: new Vector3(
@@ -145,7 +147,8 @@ export const Experience = () => {
           ),
           title: timeline && timeline[index].post.author.displayName,
           subtitle: timeline && timeline[index].post.record.text,
-          image: timeline && timeline[index].post.author.image,
+          image:
+            "https://cdn.bsky.social/imgproxy/mfhIFWl8FnNCp36MOEada6YqqecZe-J2iDQLH6FVWlU/rs:fill:1000:1000:1:0/plain/bafkreihxddlkbnblytjdbajg5qopawdfcabg5e7ppwja6zmm3lvnedzojm@jpeg",
         };
       });
 
@@ -506,7 +509,7 @@ export const Experience = () => {
   const tl = useRef();
   const backgroundColors = useRef({
     colorA: "#0BA8E6",
-    colorB: "red",
+    colorB: "white",
   });
 
   useLayoutEffect(() => {
@@ -540,6 +543,7 @@ export const Experience = () => {
               color="yellow"
               count={50}
             />
+            {/* <Trail width={1} length={4} color={"#F8D628"} /> */}
           </Float>
         </group>
       </group>
