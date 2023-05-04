@@ -21,10 +21,10 @@ export const TextSection = ({
   // );
   const loader = new THREE.TextureLoader();
   // loader.crossOrigin = "";
-  loader.setCrossOrigin("anonymous");
-  const mapOverlay = loader.load(
-    "https://cdn.bsky.social/imgproxy/fgnct5r39k5FRegmTU35eX7jDNplCj2ogI9CWkenfA4/rs:fill:1000:1000:1:0/plain/bafkreiedsuuw4pzwzmsslfshxb7ac7o325ub65p3pfj2xpvrfj4vapcv7u@jpeg"
-  );
+  // loader.setCrossOrigin("anonymous");
+  // const mapOverlay = loader.load(
+  //   "https://cdn.bsky.social/imgproxy/fgnct5r39k5FRegmTU35eX7jDNplCj2ogI9CWkenfA4/rs:fill:1000:1000:1:0/plain/bafkreiedsuuw4pzwzmsslfshxb7ac7o325ub65p3pfj2xpvrfj4vapcv7u@jpeg"
+  // );
   console.log(mapOverlay);
   console.log(props.position);
   return (

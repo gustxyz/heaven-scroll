@@ -527,6 +527,9 @@ export const Experience = () => {
     <>
       <directionalLight position={[0, 3, 1]} intensity={0.1} />
       {/* <OrbitControls /> */}
+      <Html>
+        <img src="https://cdn.bsky.social/imgproxy/fgnct5r39k5FRegmTU35eX7jDNplCj2ogI9CWkenfA4/rs:fill:1000:1000:1:0/plain/bafkreiedsuuw4pzwzmsslfshxb7ac7o325ub65p3pfj2xpvrfj4vapcv7u@jpeg"></img>
+      </Html>
 
       <group ref={cameraGroup}>
         <Background backgroundColors={backgroundColors} />
