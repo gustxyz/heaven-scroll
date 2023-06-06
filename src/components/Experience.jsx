@@ -18,8 +18,8 @@ import { fadeOnBeforeCompile } from "../utils/fadeMaterial";
 import { Background } from "./Background";
 import { Cloud } from "./Cloud";
 import { TextSection } from "./TextSection";
-// import { Butterfly } from "./Butterfly";
-import { Dog } from "./Dog";
+import { Butterfly } from "./Butterfly";
+// import { Dog } from "./Dog";
 import { AtpAgent } from "@atproto/api";
 
 const LINE_NB_POINTS = 5000;
@@ -49,7 +49,7 @@ export const Experience = () => {
     (async () => {
       const { successTL, dataTL } = await agent.login({
         identifier: "alexdaleciolong.bsky.social",
-        password: "7pzh-2t35-4lva-24ic",
+        password: "bysl-dqic-rw2t-mr6k",
       });
       // console.log(success, data);
 
@@ -514,12 +514,6 @@ export const Experience = () => {
   useLayoutEffect(() => {
     tl.current = gsap.timeline();
 
-    // tl.current.to(backgroundColors.current, {
-    //   duration: 1,
-    //   colorA: "#6f35cc",
-    //   colorB: "#ffad30",
-    // });
-
     tl.current.pause();
   }, []);
 
@@ -527,9 +521,6 @@ export const Experience = () => {
     <>
       <directionalLight position={[0, 3, 1]} intensity={0.1} />
       {/* <OrbitControls /> */}
-      <Html>
-        <img src="https://cdn.bsky.social/imgproxy/fgnct5r39k5FRegmTU35eX7jDNplCj2ogI9CWkenfA4/rs:fill:1000:1000:1:0/plain/bafkreiedsuuw4pzwzmsslfshxb7ac7o325ub65p3pfj2xpvrfj4vapcv7u@jpeg"></img>
-      </Html>
 
       <group ref={cameraGroup}>
         <Background backgroundColors={backgroundColors} />
@@ -538,22 +529,20 @@ export const Experience = () => {
         </group>
         <group ref={airplane}>
           <Float floatIntensity={1} speed={1.5} rotationIntensity={0.5}>
-            {/* <Butterfly scale={[0.01, 0.01, 0.01]} position-y={-1} /> */}
-            <Dog scale={[0.5, 0.5, 0.5]} position-y={-0.7} />
+            <Butterfly
+              scale={[0.02, 0.02, 0.02]}
+              position-y={-2}
+              position-z={-15}
+            />
             <Sparkles
               position-y={-1}
               size={particlerSizes}
               color="yellow"
-              count={50}
+              count={25}
             />
-            {/* <Trail width={1} length={4} color={"#F8D628"} /> */}
           </Float>
         </group>
       </group>
-      {/* {timeline && (
-        <Image url={timeline[0].post.author.avatar} transparent opacity={0.5} />
-      )} */}
-      {/* TEXT */}
 
       {textSections.map((textSection, index) => (
         <>
@@ -584,9 +573,8 @@ export const Experience = () => {
         </mesh>
       </group>
 
-      {/* <Float floatIntensity={0.5} speed={0.3} rotationIntensity={0.5}> */}
       {/* CLOUDS */}
-      <Float rotationIntensity={0.09}>
+      <Float rotationIntensity={0.1}>
         {clouds.map((cloud, index) => (
           <Cloud {...cloud} opacity={0.5} key={index} />
         ))}
